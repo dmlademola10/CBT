@@ -1,0 +1,33 @@
+{% extends 'master2.html' %}
+{% load static %}
+{% block style %}{% static 'css/style_dashboard.css' %}{% endblock %}
+{% block title %}Dashboard{% endblock %}
+{% block header %}Dashboard{% endblock %}
+{% block sidebar %}
+<div class="sidelink active" data-for="{% url 'dashboard' %}">
+    <span>Dashboard</span>
+</div>
+<div class="sidelink" data-for="{% url 'exams' %}">
+    <span>Exams</span>
+</div>
+<div class="sidelink" data-for="{% url 'courses' %}">
+    <span>Courses</span>
+</div>
+<div class="sidelink" data-for="">
+    <span>Register</span>
+    <!-- student, course, admin -->
+</div>
+<div class="sidelink" data-for="">
+    <span>Approval</span>
+    <!-- student -->
+</div>
+<div class="sidelink" data-for="">
+    <span>Admins</span>
+</div>
+<div class="sidelink" data-for="">
+    <span>Students</span>
+</div>
+{% endblock sidebar %}
+{% block content %}
+
+{% endblock %}

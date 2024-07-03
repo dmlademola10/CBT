@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{% static 'plugins/fontawesome-free-6.5.2-web/css/all.min.css' %}" />
+        <link rel="stylesheet" href="{% block style %}{% endblock  %}">
+        <link rel="stylesheet" href="{% static 'css/style2.css' %}">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <title>CBT - {% block title %}{% endblock title %}</title>
+    </head>
+
+    <body>
+        <div class="container">
+            <div class="top">
+                <div>
+                    <span><span class="fa fa-hamburger open_menu" title="Open Sidebar"></span><span class="fa fa-arrow-left close_menu" title="Close Sidebar"></span> {% block header %}{% endblock %}</span>
+                </div>
+                <div>
+                    <img src="{% static 'images/avatar.jpeg' %}" alt="user">
+                </div>
+            </div>
+            <div class="mid">
+                <div class="sidebar">
+                    {% block sidebar %}{% endblock  %}
+                </div>
+                <div class="main">
+                    {% block content %}{% endblock content %}
+                </div>
+            </div>
+        </div>
+        <script src="{% static 'js/script.js' %}"></script>
+        <script src="{% static 'js/scripttwo.js' %}"></script>
+        <script src="{% block script %}{% endblock %}"></script>
+    </body>
+
+</html>

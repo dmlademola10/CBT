@@ -1,0 +1,171 @@
+.add_exam {
+    border: 0;
+    border-radius: 0.5rem;
+    font-size: x-large;
+    background-color: rgb(71, 123, 211);
+    /* background-color: rgb(17, 208, 17); */
+    cursor: pointer;
+    color: white;
+}
+
+.add_exam_box,
+.edit_exam_box {
+    flex-direction: column;
+    background-color: rgb(21, 23, 27);
+    border-radius: 1rem;
+    border: 1px solid whitesmoke;
+    width: 80%;
+    height: 80%;
+    padding: 10px;
+    display: none;
+}
+
+.background {
+    background-color: rgba(0, 0, 0, 0.7);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    backdrop-filter: blur(2.5px);
+}
+
+#close {
+    position: absolute;
+    top: 10px;
+    right: 50px;
+    font-size: xx-large;
+    cursor: pointer;
+}
+
+.exam {
+    background-color: rgb(21, 23, 27);
+    padding: 10px 5px;
+    margin: 2px 0;
+    border-radius: 0.4rem;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.exam .icon {
+    float: right;
+    margin: 2px 4px;
+}
+
+.exam:hover {
+    background-color: rgb(52, 52, 62);
+}
+
+.exam .del {
+    color: red;
+}
+
+.exams {
+    display: flex;
+    align-self: stretch;
+    flex: 1;
+    flex-direction: column;
+    overflow: auto;
+    contain: size;
+}
+
+.exams h1 {
+    text-align: center;
+}
+
+form button[type=submit] {
+    display: block;
+    margin: auto;
+    font-size: x-large;
+    border: 0;
+    border-radius: 0.4rem;
+    background-color: rgb(218, 230, 255);
+    color: black;
+    cursor: pointer;
+}
+
+.message,
+.edit_message {
+    display: none;
+    margin: 5px 0;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    align-items: center;
+}
+
+input {
+    color: whitesmoke;
+}
+
+.input_group {
+    display: flex;
+    border: 1px solid whitesmoke;
+    border-radius: 1rem;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.input_group .hide,
+.input_group .unhide {
+    cursor: pointer;
+    user-select: none;
+    align-self: center;
+}
+
+.input_group .hide {
+    display: none;
+}
+
+.input_group input {
+    border: 0;
+    background-color: transparent;
+    flex: 1;
+    font-size: xx-large;
+}
+
+.input_group select {
+    background-color: transparent;
+    color: whitesmoke;
+    font-size: xx-large;
+    border: 0;
+    outline: 0;
+    flex: 1;
+}
+
+.input_group select:focus {
+    outline: 0;
+}
+
+.input_group span {
+    font-size: xx-large;
+    cursor: pointer;
+    user-select: none;
+}
+
+.input_group input:focus {
+    outline: 0;
+}
+
+.label {
+    display: block;
+}
+
+.inputs {
+    flex: 1;
+}
+
+option {
+    color: black;
+    font-size: large;
+}
+
+optgroup {
+    color: black;
+}

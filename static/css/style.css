@@ -1,0 +1,51 @@
+html,
+body {
+  margin: 0;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  hyphens: auto;
+  height: 100%;
+  background-color: rgb(30, 30, 38);
+  color: whitesmoke;
+}
+
+a {
+  color: rgb(105, 105, 255)
+}
+
+.failure,
+.success {
+  padding: 10px;
+  color: black;
+  text-align: center;
+  font-weight: bold;
+}
+
+.failure {
+  background-color: rgb(255, 148, 148);
+  border-left: 5px solid red;
+}
+
+.input_group input:focus {
+  outline: 0;
+}
+
+.success {
+  background-color: rgb(190, 255, 147);
+  border-left: 5px solid green;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* ::-webkit-scrollbar-track{
+  background-color: rgb(94, 95, 95);
+} */
+::-webkit-scrollbar-thumb {
+  border-radius: 0.3rem;
+  background-color: rgb(52, 52, 52);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(94, 95, 95);
+}

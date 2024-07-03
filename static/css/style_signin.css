@@ -1,0 +1,120 @@
+.container {
+    padding: 5px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.container h1 {
+    user-select: none;
+    margin: 10px 0;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    flex-wrap: nowrap;
+}
+
+.failure,
+.success {
+    margin: 5px;
+}
+
+form button[type=submit] {
+    display: block;
+    margin: auto;
+    font-size: x-large;
+    border: 0;
+    border-radius: 0.4rem;
+    background-color: rgb(218, 230, 255);
+    color: black;
+    cursor: pointer;
+}
+
+input {
+    color: whitesmoke;
+}
+
+.input_group {
+    display: flex;
+    border: 1px solid whitesmoke;
+    border-radius: 1rem;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.input_group .hide,
+.input_group .unhide {
+    cursor: pointer;
+    user-select: none;
+    align-self: center;
+}
+
+.input_group .hide {
+    display: none;
+}
+
+.input_group input {
+    border: 0;
+    background-color: transparent;
+    flex: 1;
+    font-size: xx-large;
+}
+
+.input_group span {
+    font-size: xx-large;
+    cursor: pointer;
+    user-select: none;
+}
+
+.input_group input:focus {
+    outline: 0;
+}
+
+.label {
+    display: block;
+}
+
+.low {
+    text-align: center;
+    margin: 5px;
+}
+
+.mid {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    color: whitesmoke;
+    contain: size;
+}
+
+.parent {
+    display: flex;
+    flex-direction: column;
+    /* width: 60%; */
+    border: 1px solid whitesmoke;
+    border-radius: 2rem;
+    flex: 1;
+    overflow: hidden;
+    margin: 2%;
+    padding: 15px;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.top {
+    max-width: 100%;
+    padding: 20px;
+    border-bottom: 1px ridge whitesmoke;
+    background-color: rgb(21, 23, 27);
+    text-align: center;
+    color: whitesmoke;
+}
+
+.top span {
+    font-style: italic;
+}

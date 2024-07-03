@@ -1,0 +1,33 @@
+{% extends 'master.html' %}
+{% load static %}
+{% block style %}{% static 'css/style_signin.css' %}{% endblock %}
+{% block title %}Sign In{% endblock %}
+{% block content %}
+<h1>SIGN IN</h1>
+<form autocomplete="off" action="" method="post">
+    {% csrf_token %}
+    {% if output and output.result is True %}
+    <div class="success">{{ output.message }}</div>
+    {% elif output and output.result is False %}
+    <div class="failure">{{ output.message }}</div>
+    {% endif %}
+    <span class="label">Username</span>
+    <div class="input_group">
+        <input type="text" id="username" name="username" autocomplete="off" value="" spellcheck="false" required />
+        <span class="clear" data-for="username, password" title="Clear Username">&times;</span>
+    </div>
+    <span class="label">Password</span>
+    <div class="input_group">
+        <input type="password" id="password" name="password" autocomplete="off" spellcheck="false" required />
+        <span class="fa fa-eye fa-1x unhide" data-for="password" title="Unhide password"></span>
+        <span class="fa fa-eye-slash fa-1x hide" data-for="password" title="Hide password"></span>
+    </div>
+    <div class="low">
+        <a href="">Forgot Password?</a>
+        &nbsp;&nbsp;&nbsp;
+        <a href="{% url 'signup' %}">Create Account.</a>
+    </div>
+    <button type="submit">SUBMIT</button>
+</form>
+{% endblock %}
+{% block script %}{% static 'js/script_signin.js' %}{% endblock %}

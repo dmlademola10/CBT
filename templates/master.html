@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>CBT - {% block title %}{% endblock %}</title>
+        <link rel="stylesheet" href="{% block style %}{% endblock %}" />
+        <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+        <link rel="stylesheet" href="{% static 'plugins/fontawesome-free-6.5.2-web/css/all.min.css' %}" />
+    </head>
+
+    <body>
+        <div class="content">
+            <div class="top">
+                <h1>CBT</h1>
+                <span>...providing safe e-xaminations</span>
+            </div>
+            <div class="mid">
+                <div class="parent">
+                    <div class="container">
+                        {% block content %}{% endblock content %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="{% static 'js/script.js' %}"></script>
+        <script src="{% static 'plugins/fontawesome-free-6.5.2-web/js/all.min.js' %}"></script>
+        <script src="{% static 'plugins/fontawesome-free-6.5.2-web/js/all.js' %}"></script>
+        <script src="{% block script %}{% endblock %}"></script>
+    </body>
+
+</html>
