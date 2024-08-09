@@ -1,16 +1,5 @@
-.add_exam {
-    border: 0;
-    border-radius: 0.5rem;
-    font-size: x-large;
-    background-color: rgb(71, 123, 211);
-    /* background-color: rgb(17, 208, 17); */
-    cursor: pointer;
-    color: white;
-    margin-bottom: 5px;
-}
-
-.add_exam_box,
-.edit_exam_box {
+.add_faculty_box,
+.edit_faculty_box {
     flex-direction: column;
     background-color: rgb(21, 23, 27);
     border-radius: 1rem;
@@ -42,7 +31,17 @@
     cursor: pointer;
 }
 
-.exam {
+#create {
+    border: 0;
+    border-radius: 0.5rem;
+    font-size: x-large;
+    background-color: rgb(71, 123, 211);
+    cursor: pointer;
+    color: white;
+    margin-bottom: 5px;
+}
+
+.faculty {
     background-color: rgb(21, 23, 27);
     padding: 10px 5px;
     margin: 2px 0;
@@ -51,20 +50,20 @@
     transition: 0.5s;
 }
 
-.exam .icon {
+.faculty .icon {
     float: right;
     margin: 2px 4px;
 }
 
-.exam:hover {
+.faculty:hover {
     background-color: rgb(52, 52, 62);
 }
 
-.exam .del {
+.faculty .del {
     color: red;
 }
 
-.exams {
+.faculties {
     display: flex;
     align-self: stretch;
     flex: 1;
@@ -73,7 +72,7 @@
     contain: size;
 }
 
-.exams h1 {
+.faculties h1 {
     text-align: center;
 }
 
@@ -88,21 +87,12 @@ form button[type=submit] {
     cursor: pointer;
 }
 
-.message,
-.edit_message {
-    display: none;
-    margin: 5px 0;
-}
-
-.main {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    align-items: center;
-}
-
 input {
     color: whitesmoke;
+}
+
+.inputs {
+    flex: 1;
 }
 
 .input_group {
@@ -158,15 +148,15 @@ input {
     display: block;
 }
 
-.inputs {
+.main {
+    display: flex;
+    flex-direction: column;
     flex: 1;
+    align-items: center;
 }
 
-option {
-    color: black;
-    font-size: large;
-}
-
-optgroup {
-    color: black;
+.message,
+.edit_message {
+    display: none;
+    margin: 5px 0;
 }

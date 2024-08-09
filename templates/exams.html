@@ -4,36 +4,44 @@
 {% block title %}Exams{% endblock %}
 {% block header %}Exams{% endblock %}
 {% block sidebar %}
-<div class="sidelink" data-for="{% url 'dashboard' %}">
+
+<div class="sidelink" data-id="{% url 'dashboard' %}">
     <span>Dashboard</span>
 </div>
-<div class="sidelink active" data-for="{% url 'exams' %}">
+<div class="sidelink active" data-id="{% url 'exams' %}">
     <span>Exams</span>
 </div>
-<div class="sidelink" data-for="{% url 'courses' %}">
+<div class="sidelink" data-id="{% url 'faculties' %}">
+    <span>Faculties</span>
+</div>
+<div class="sidelink" data-id="">
     <span>Courses</span>
 </div>
-<div class="sidelink" data-for="">
+<div class="sidelink" data-id="">
     <span>Register</span>
     <!-- student, course, admin -->
 </div>
-<div class="sidelink" data-for="">
+<div class="sidelink" data-id="">
     <span>Approval</span>
     <!-- student -->
 </div>
-<div class="sidelink" data-for="">
+<div class="sidelink" data-id="">
     <span>Admins</span>
 </div>
-<div class="sidelink" data-for="">
+<div class="sidelink" data-id="">
     <span>Students</span>
 </div>
 
 {% endblock sidebar %}
 {% block content %}
-<button class="add_exam" type="button" id="add_exam" data-for="add_exam_box">&plus; Create Exam</button>
+<button class="add_exam" type="button" id="add_exam" data-id="add_exam_box">&plus; Create Exam</button>
 <div class="exams">
     {% for exam in exams %}
-    <div class="exam" data-for="{{exam.id}}">{{ exam.label }} <span class="fa fa-trash-can icon del" title="Delete"></span><span class="fa fa-pencil icon edit" title="Edit"></span></div>
+    <div class="exam" data-id="{{exam.id}}">
+        {{ exam.label }}
+        <span class="fa fa-trash-can icon del" title="Delete"></span>
+        <span class="fa fa-pencil icon edit" title="Edit"></span>
+    </div>
     {% empty %}
     <h1>No exam found!</h1>
     {% endfor %}
@@ -49,7 +57,7 @@
                 <span class="label">Exam Label</span>
                 <div class="input_group">
                     <input type="text" id="label" name="label" autocomplete="off" value="" required />
-                    <span class="clear" data-for="label" title="Clear Exam Label">&times;</span>
+                    <span class="clear" data-id="label" title="Clear Exam Label">&times;</span>
                 </div>
                 <span class="label">Course</span>
                 <div class="input_group">
@@ -74,7 +82,7 @@
                 <span class="label">Exam Label</span>
                 <div class="input_group">
                     <input type="text" id="edit_label" name="edit_label" autocomplete="off" value="" required />
-                    <span class="clear" data-for="edit_label" title="Clear Exam Label">&times;</span>
+                    <span class="clear" data-id="edit_label" title="Clear Exam Label">&times;</span>
                 </div>
                 <span class="label">Course</span>
                 <div class="input_group">

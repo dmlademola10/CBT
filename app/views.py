@@ -1,4 +1,5 @@
-"""_summary_
+"""
+_summary_
 """
 import datetime
 from django.http import HttpResponse, HttpResponsePermanentRedirect, HttpResponseRedirect
@@ -10,12 +11,11 @@ from . import validations
 from .models import Course, Exam, Faculty, User
 from django.contrib.auth import hashers
 
-# from . import kessyboobs2
-
 # Create your views here.
 
 def redirect(request):
-    """_summary_
+    """
+    _summary_
 
     Args:
         request (_type_): _description_
@@ -35,7 +35,8 @@ def redirect(request):
 
 
 def signin(request):
-    """_summary_
+    """
+    _summary_
 
     Args:
         request (_type_): _description_
@@ -63,7 +64,8 @@ def signin(request):
 
 
 def signup(request):
-    """_summary_
+    """
+    _summary_
 
     Args:
         request (_type_): _description_
@@ -114,7 +116,8 @@ def signup(request):
 
 
 def dashboard(request):
-    """_summary_
+    """
+    _summary_
 
     Args:
         request (_type_): _description_
@@ -137,7 +140,8 @@ def dashboard(request):
 
 
 def exams(request):
-    """_summary_
+    """
+    _summary_
 
     Args:
         request (_type_): _description_
@@ -162,22 +166,23 @@ def exams(request):
     else:
         return render(request, "exams.html", context)
 
-def courses(request):
-    """_summary_
+def faculties(request):
+    """
+    _summary_
 
     Args:
         request (_type_): _description_
     """
     try:
         if request.session.get("user", False) is False:
-            return HttpResponseRedirect(reverse("signin") + "?proceed=" + reverse("exams"))
+            return HttpResponseRedirect(reverse("signin") + "?proceed=" + reverse("faculties"))
 
         context = dict()
-        context["collection"] = myutils.facs()
+        context["faculties"] = Faculty.objects.all()
 
     except BaseException as e:
         print(str(e))
         return HttpResponse("An error occured!")
 
     else:
-        return render(request, "courses.html", context)
+        return render(request, "faculties.html", context)

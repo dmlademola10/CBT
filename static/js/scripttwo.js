@@ -21,7 +21,7 @@ window.addEventListener("load", () => {
     });
     $A(".sidelink").forEach((elem) => {
         elem.addEventListener("click", () => {
-            window.location.assign(elem.getAttribute("data-for"));
+            window.location.assign(elem.getAttribute("data-id"));
         });
     })
 });

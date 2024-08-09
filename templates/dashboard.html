@@ -4,29 +4,34 @@
 {% block title %}Dashboard{% endblock %}
 {% block header %}Dashboard{% endblock %}
 {% block sidebar %}
-<div class="sidelink active" data-for="{% url 'dashboard' %}">
+
+<div class="sidelink active" data-id="{% url 'dashboard' %}">
     <span>Dashboard</span>
 </div>
-<div class="sidelink" data-for="{% url 'exams' %}">
+<div class="sidelink" data-id="{% url 'exams' %}">
     <span>Exams</span>
 </div>
-<div class="sidelink" data-for="{% url 'courses' %}">
+<div class="sidelink" data-id="{% url 'faculties' %}">
+    <span>Faculties</span>
+</div>
+<div class="sidelink" data-id="">
     <span>Courses</span>
 </div>
-<div class="sidelink" data-for="">
+<div class="sidelink" data-id="">
     <span>Register</span>
     <!-- student, course, admin -->
 </div>
-<div class="sidelink" data-for="">
+<div class="sidelink" data-id="">
     <span>Approval</span>
     <!-- student -->
 </div>
-<div class="sidelink" data-for="">
+<div class="sidelink" data-id="">
     <span>Admins</span>
 </div>
-<div class="sidelink" data-for="">
+<div class="sidelink" data-id="">
     <span>Students</span>
 </div>
+
 {% endblock sidebar %}
 {% block content %}
 

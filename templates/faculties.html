@@ -1,0 +1,86 @@
+{% extends 'master2.html' %}
+{% load static %}
+{% block style %}{% static 'css/style_faculties.css' %}{% endblock %}
+{% block title %}Faculties{% endblock %}
+{% block header %}Faculties{% endblock %}
+{% block sidebar %}
+
+<div class="sidelink" data-id="{% url 'dashboard' %}">
+    <span>Dashboard</span>
+</div>
+<div class="sidelink" data-id="{% url 'exams' %}">
+    <span>Exams</span>
+</div>
+<div class="sidelink active" data-id="{% url 'faculties' %}">
+    <span>Faculties</span>
+</div>
+<div class="sidelink" data-id="">
+    <span>Courses</span>
+</div>
+<div class="sidelink" data-id="">
+    <span>Register</span>
+    <!-- student, course, admin -->
+</div>
+<div class="sidelink" data-id="">
+    <span>Approval</span>
+    <!-- student -->
+</div>
+<div class="sidelink" data-id="">
+    <span>Admins</span>
+</div>
+<div class="sidelink" data-id="">
+    <span>Students</span>
+</div>
+
+{% endblock sidebar %}
+{% block content %}
+<button class="create" type="button" id="create" data-id="add_faculty_box">&plus; Create</button>
+<div class="faculties">
+    {% for faculty in faculties %}
+    <div class="faculty" data-id="{{faculty.id}}">
+        Faculty of {{ faculty.name }}
+        <span class="fa fa-trash-can icon del" title="Delete"></span>
+        <span class="fa fa-pencil icon edit" title="Edit"></span>
+    </div>
+    {% empty %}
+    <h1>No faculty found!</h1>
+    {% endfor %}
+</div>
+<div class="background">
+    <span id="close">&times;</span>
+    <div class="add_faculty_box" id="add_faculty_box">
+        <h3>Add Faculty</h3>
+        <div class="inputs">
+            <form autocomplete="off" method="post" name="new_faculty" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="message failure" id="message"></div>
+                <span class="label">Faculty of...</span>
+                <div class="input_group">
+                    <input type="text" id="name" name="name" autocomplete="off" value="" placeholder="Sciences" required />
+                    <span class="clear" data-id="name" title="Clear Faculty Name">&times;</span>
+                </div>
+                <button type="submit">SUBMIT</button>
+            </form>
+        </div>
+    </div>
+    <div class="edit_faculty_box" id="edit_faculty_box">
+        <h3>Edit Faculty</h3>
+        <div class="inputs">
+            <form autocomplete="off" method="post" name="edit_faculty" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="edit_message failure" id="edit_message"></div>
+                <input type="hidden" name="id">
+                <span class="name">Faculty of...</span>
+                <div class="input_group">
+                    <input type="text" id="edit_name" name="edit_name" autocomplete="off" placeholder="Arts" value="" required />
+                    <span class="clear" data-id="edit_name" title="Clear Faculty Name">&times;</span>
+                </div>
+                <button type="submit">SUBMIT</button>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="floating_msg" title="Click to close"></div>
+</div>
+{% endblock %}
+{% block script %}{% static 'js/script_faculties.js' %}{% endblock %}

@@ -1,7 +1,7 @@
 window.addEventListener("load", () => {
     $("#add_exam").addEventListener("click", () => {
         $("#message").style.display = "none";
-        open_box("#" + $("#add_exam").getAttribute("data-for"));
+        open_box("#" + $("#add_exam").getAttribute("data-id"));
     });
     $A(".background>div").forEach((elem) => {
         elem.addEventListener("click", (event) => {
@@ -16,7 +16,7 @@ window.addEventListener("load", () => {
     });
     $A("span.clear").forEach((elem) => {
         elem.addEventListener("click", () => {
-            inputs = elem.getAttribute("data-for").split(", ");
+            inputs = elem.getAttribute("data-id").split(", ");
             inputs.forEach((element) => {
                 clear_input(element)
             });
@@ -28,7 +28,7 @@ window.addEventListener("load", () => {
             elem.classList.remove("fa-pencil");
             elem.classList.add("fa-spinner");
             elem.classList.add("fa-spin-pulse");
-            get_exam(elem.parentElement.getAttribute("data-for"), elem);
+            get_exam(elem.parentElement.getAttribute("data-id"), elem);
         });
     });
     $A(".del").forEach((elem) => {
@@ -37,7 +37,7 @@ window.addEventListener("load", () => {
             elem.classList.add("fa-spinner");
             elem.classList.add("fa-spin-pulse");
             if (confirm("Are you sure you want to delete this exam? \n" + elem.parentElement.outerText + "\nThis action can't be undone!")) {
-                del_exam(elem.parentElement.getAttribute("data-for"), elem);
+                del_exam(elem.parentElement.getAttribute("data-id"), elem);
             }
         });
     });
@@ -57,7 +57,7 @@ window.addEventListener("load", () => {
         $("#edit_message").style.display = "none";
         $("#edit_message").innerHTML = "";
     });
-    $('form[name="new_exam"]').addEventListener("submit", function (event) {
+    $forms("new_exam").addEventListener("submit", function (event) {
         event.preventDefault();
 
         const formData = new FormData($forms("new_exam"));
@@ -91,12 +91,12 @@ window.addEventListener("load", () => {
             // console.error(xmlhttp.statusText);
         };
 
-        xmlhttp.open("POST", "/exams/create/", true);
+        xmlhttp.open("POST", "/exams/fetch/create/", true);
         xmlhttp.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
         xmlhttp.send(formData);
     });
 
-    $('form[name="edit_exam"]').addEventListener("submit", function (event) {
+    $forms("edit_exam").addEventListener("submit", function (event) {
         event.preventDefault();
 
         const formData = new FormData($forms("edit_exam"));
@@ -126,10 +126,9 @@ window.addEventListener("load", () => {
             $("#edit_message").classList.add("failure");
             $("#edit_message").classList.remove("success");
             $("#edit_message").innerHTML = response.message;
-            // console.error(xmlhttp.statusText);
         };
 
-        xmlhttp.open("POST", "/exams/edit/", true);
+        xmlhttp.open("POST", "/exams/fetch/edit/", true);
         xmlhttp.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
         xmlhttp.send(formData);
     });
@@ -156,9 +155,9 @@ window.addEventListener("load", () => {
                     items.forEach((item) => {
                         div = document.createElement("div");
                         div.classList.add("exam");
-                        for_ = document.createAttribute("data-for");
+                        for_ = document.createAttribute("data-id");
                         div.attributes.setNamedItem(for_);
-                        div.setAttribute("data-for", item.id);
+                        div.setAttribute("data-id", item.id);
                         text_ = document.createTextNode(item.label);
                         div.appendChild(text_);
 
@@ -189,7 +188,7 @@ window.addEventListener("load", () => {
                             elem.classList.remove("fa-pencil");
                             elem.classList.add("fa-spinner");
                             elem.classList.add("fa-spin-pulse");
-                            get_exam(elem.parentElement.getAttribute("data-for"), elem);
+                            get_exam(elem.parentElement.getAttribute("data-id"), elem);
                         });
                     });
                     $A(".del").forEach((elem) => {
@@ -198,7 +197,7 @@ window.addEventListener("load", () => {
                             elem.classList.add("fa-spinner");
                             elem.classList.add("fa-spin-pulse");
                             if (confirm("Are you sure you want to delete this exam? \n" + elem.parentElement.outerText + "\nThis action can't be undone!")) {
-                                del_exam(elem.parentElement.getAttribute("data-for"), elem);
+                                del_exam(elem.parentElement.getAttribute("data-id"), elem);
                             }
                         });
                     });
@@ -213,7 +212,7 @@ window.addEventListener("load", () => {
             // console.error(xmlhttp.statusText);
         };
 
-        xmlhttp.open("GET", "/exams/refresh/", true);
+        xmlhttp.open("GET", "/exams/fetch/refresh/", true);
         xmlhttp.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
         xmlhttp.send();
     }, 3000);
@@ -258,7 +257,7 @@ function get_exam(id, icon) {
         // console.error(xmlhttp.statusText);
     };
 
-    xmlhttp.open("GET", "/exams/get/" + id, true);
+    xmlhttp.open("GET", "/exams/fetch/get/" + id, true);
     xmlhttp.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
     xmlhttp.send();
 }
@@ -297,7 +296,7 @@ function del_exam(id, icon) {
         // console.error(xmlhttp.statusText);
     };
 
-    xmlhttp.open("GET", "/exams/delete/" + id, true);
+    xmlhttp.open("GET", "/exams/fetch/delete/" + id, true);
     xmlhttp.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
     xmlhttp.send();
 }

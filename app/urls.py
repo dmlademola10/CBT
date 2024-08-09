@@ -13,13 +13,17 @@ urlpatterns = [
     path('signup/', views.signup, name="signup"),
     path('dashboard/', views.dashboard, name="dashboard"),
     path('exams/', views.exams, name="exams"),
-    path('courses/', views.courses, name="courses"),
+    path('faculties/', views.faculties, name="faculties"),
     # path('run/', views.runn, name="run"),
 
     # ajax
-    path('exams/create/', ajax.create_exam),
-    path('exams/refresh/', ajax.refresh_exam),
-    path('exams/get/<str:id>', ajax.get_exam),
-    path('exams/edit/', ajax.edit_exam),
-    path('exams/delete/<str:id>', ajax.del_exam),
+    # exams
+    path('exams/fetch/create/', ajax.create_exam),
+    path('exams/fetch/refresh/', ajax.refresh_exam),
+    path('exams/fetch/get/<str:id>', ajax.get_exam),
+    path('exams/fetch/edit/', ajax.edit_exam),
+    path('exams/fetch/delete/<str:id>', ajax.del_exam),
+    # courses
+    path('faculties/fetch/create/', ajax.create_faculty),
+    path('faculties/fetch/get/<str:id>', ajax.get_faculty),
 ]

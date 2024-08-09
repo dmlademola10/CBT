@@ -1,9 +1,8 @@
 """_summary_
 """
-import datetime
 from django.contrib.auth import hashers
 import regex
-from .models import Course, Exam, User
+from .models import Course, Exam, User, Faculty
 
 
 
@@ -66,8 +65,8 @@ def signup_v(u_input):
         if not u_input["firstname"]:
             return Output("Input your firstname.")
 
-        if len(u_input["firstname"]) < 3:
-            return Output("Firstname should be more than 3 characters.")
+        if len(u_input["firstname"]) < 2:
+            return Output("Firstname should be more than 2 characters.")
 
         if len(u_input["firstname"]) > 50:
             return Output("Firstname should not be more than 50 characters.")
@@ -198,8 +197,8 @@ def exam_v(u_input):
         if len(u_input["label"]) > 50:
             return Output("Exam label should not have more than 50 characters.")
 
-        if not regex.fullmatch(r"^[a-zA-Z0-9\s]+$", u_input["label"]):
-            return Output("Exam label should only contain alphabets and numeric characters.")
+        if not regex.fullmatch(r"^[a-zA-Z0-9()\s]+$", u_input["label"]):
+            return Output("Exam label should only contain alphabets, parentheses, and numeric characters.")
 
         if Exam.objects.filter(label=u_input["label"], course=u_input["course"]).exists():
             return Output("Exam with same label and course already exists.")
@@ -223,3 +222,31 @@ def exam_v(u_input):
 
     else:
         return Output("Exam saved successfully!", True)
+
+
+def faculty_v(u_input):
+    try:
+        if u_input.get("id", False) is not False and not u_input["id"].isnumeric():
+            return Output("An error occured, try reloading the page.")
+
+        if not u_input["name"]:
+            return Output("Input Faculty name.")
+
+        if len(u_input["name"]) < 4:
+            return Output("Faculty name should not have lesser than 4 characters.")
+
+        if len(u_input["name"]) > 100:
+            return Output("Faculty name should not have more than 100 characters.")
+
+        if not regex.fullmatch(r"^[a-zA-Z0-9()\s]+$", u_input["name"]):
+            return Output("Faculty name should only contain alphabets, parentheses, and numeric characters.")
+
+        if Faculty.objects.filter(name=u_input["name"]).exists():
+            return Output("Faculty with same name already exists.")
+
+    except BaseException as e:
+        print(e)
+        return Output("An unknown error occured!")
+
+    else:
+        return Output("Faculty saved successfully!", True)

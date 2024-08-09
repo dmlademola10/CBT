@@ -18,17 +18,17 @@
     <span class="label">Firstname</span>
     <div class="input_group">
         <input type="text" id="firstname" name="firstname" autocomplete="off" {% if inputs and inputs.firstname %} value="{{inputs.firstname}}" {% else %} value="" {% endif %} spellcheck="false" required />
-        <span class="clear" data-for="firstname" title="Clear Firstname">&times;</span>
+        <span class="clear" data-id="firstname" title="Clear Firstname">&times;</span>
     </div>
     <span class="label">Lastname</span>
     <div class="input_group">
         <input type="text" id="lastname" name="lastname" autocomplete="off" {% if inputs and inputs.lastname %} value="{{inputs.lastname}}" {% else %} value="" {% endif %} spellcheck="false" required />
-        <span class="clear" data-for="lastname" title="Clear Lastname">&times;</span>
+        <span class="clear" data-id="lastname" title="Clear Lastname">&times;</span>
     </div>
     <span class="label">Other Name</span>
     <div class="input_group">
         <input type="text" id="othername" name="othername" autocomplete="off" {% if inputs and inputs.othername %} value="{{inputs.othername}}" {% else %} value="" {% endif %} spellcheck="false" />
-        <span class="clear" data-for="othername" title="Clear Othername">&times;</span>
+        <span class="clear" data-id="othername" title="Clear Othername">&times;</span>
     </div>
     <span class="label">Course</span>
     <div class="input_group">
@@ -42,29 +42,29 @@
     <span class="label">Matric Number</span>
     <div class="input_group">
         <input type="text" id="matric_number" name="matric_number" autocomplete="off" {% if inputs and inputs.matric_number %} value="{{inputs.matric_number}}" {% else %} value="" {% endif %} spellcheck="false" required />
-        <span class="clear" data-for="matric_number" title="Clear Matric Number">&times;</span>
+        <span class="clear" data-id="matric_number" title="Clear Matric Number">&times;</span>
     </div>
     <span class="label">Email</span>
     <div class="input_group">
         <input type="email" id="email" name="email" autocomplete="off" {% if inputs and inputs.email %} value="{{inputs.email}}" {% else %} value="" {% endif %} spellcheck="false" required />
-        <span class="clear" data-for="email" title="Clear Email">&times;</span>
+        <span class="clear" data-id="email" title="Clear Email">&times;</span>
     </div>
     <span class="label">Username</span>
     <div class="input_group">
         <input type="text" id="username" name="username" autocomplete="off" {% if inputs and inputs.username %} value="{{inputs.username}}" {% else %} value="" {% endif %} spellcheck="false" required />
-        <span class="clear" data-for="username, password, cpassword" title="Clear Username">&times;</span>
+        <span class="clear" data-id="username, password, cpassword" title="Clear Username">&times;</span>
     </div>
     <span class="label">Password</span>
     <div class="input_group">
         <input type="password" id="password" name="password" autocomplete="off" spellcheck="false" required />
-        <span class="fa fa-eye fa-1x unhide" data-for="password" title="Unhide Password"></span>
-        <span class="fa fa-eye-slash fa-1x hide" data-for="password" title="Hide Password"></span>
+        <span class="fa fa-eye fa-1x unhide" data-id="password" title="Unhide Password"></span>
+        <span class="fa fa-eye-slash fa-1x hide" data-id="password" title="Hide Password"></span>
     </div>
     <span class="label">Confirm Password</span>
     <div class="input_group">
         <input type="password" id="cpassword" name="cpassword" autocomplete="off" spellcheck="false" required />
-        <span class="fa fa-eye fa-1x unhide" data-for="cpassword" title="Unhide Confirm Password"></span>
-        <span class="fa fa-eye-slash fa-1x hide" data-for="cpassword" title="Hide Confirm Password"></span>
+        <span class="fa fa-eye fa-1x unhide" data-id="cpassword" title="Unhide Confirm Password"></span>
+        <span class="fa fa-eye-slash fa-1x hide" data-id="cpassword" title="Hide Confirm Password"></span>
     </div>
     <div class="low">
         <a href="{% url 'signin' %}">Sign In.</a>
