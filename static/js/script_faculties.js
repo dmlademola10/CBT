@@ -97,6 +97,39 @@ window.addEventListener("load", () => {
             console.error(reason);
         });
     })
+    $forms("edit_faculty").addEventListener("submit", function (event) {
+        event.preventDefault();
+        const formData = new FormData($forms("edit_faculty"));
+        const headers = new Headers();
+        headers.set("X-Requested-With", "XMLHttpRequest");
+        const options = {
+            headers: headers,
+        }
+        const req = new Request("/faculties/fetch/edit/", options);
+        fetch(req, { method: "POST", body: formData }).then(res => {
+            if (!res.ok) {
+                $("#edit_message").classList.add("failure");
+                $("#edit_message").classList.remove("success");
+                $("#edit_message").innerHTML = "An error occured!";
+                msg(response.message);
+            }
+            return res.json();
+        }).then(response => {
+            if (response.result == true) {
+                $("#edit_message").classList.add("success");
+                $("#edit_message").classList.remove("failure");
+                $forms("new_faculty").reset();
+            } else {
+                $("#edit_message").classList.add("failure");
+                $("#edit_message").classList.remove("success");
+            }
+            $("#edit_message").style.display = "block";
+            $("#edit_message").innerHTML = response.message;
+        }, reason => {
+            msg("<span class='fa fa-triangle-exclamation'></span> An error occurred while contacting the server!");
+            console.error(reason);
+        });
+    })
 });
 
 function open_box(child) {

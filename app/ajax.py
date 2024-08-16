@@ -109,7 +109,7 @@ def edit_exam(request):
             response["result"] = False
 
         elif request.method == "POST" and ajax(request):
-            u_inputs=dict(id=request.POST["id"], label=request.POST["edit_label"], course=request.POST["edit_course"])
+            u_inputs = request.POST.dict()
             output = validations.exam_v(u_inputs)
             if output.result is True:
                 try:
@@ -193,7 +193,10 @@ def create_faculty(request):
 
         elif request.method == "POST" and ajax(request):
             u_inputs = request.POST.dict()
-            u_inputs["name"] = u_inputs["name"].removeprefix("Faculty of ")
+            words = ["Faculty of", "Fac. of", "Fac of", "Faculties of", "Facs. of", "Facs of"]
+            for word in words:
+                u_inputs["name"] = u_inputs["name"].removeprefix(word + " ")
+
             print(u_inputs)
             output = validations.faculty_v(u_inputs)
             if output.result is True:
@@ -260,7 +263,11 @@ def edit_faculty(request):
             response["result"] = False
 
         elif request.method == "POST" and ajax(request):
-            u_inputs=dict(id=request.POST["id"], name=request.POST["edit_name"].removeprefix("Faculty of "))
+            u_inputs = request.POST.dict()
+            words = ["Faculty of", "Fac. of", "Fac of", "Faculties of", "Facs. of", "Facs of"]
+            for word in words:
+                u_inputs["name"] = u_inputs["name"].removeprefix(word + " ")
+
             output = validations.faculty_v(u_inputs)
             if output.result is True:
                 try:

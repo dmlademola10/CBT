@@ -23,7 +23,8 @@ urlpatterns = [
     path('exams/fetch/get/<str:id>', ajax.get_exam),
     path('exams/fetch/edit/', ajax.edit_exam),
     path('exams/fetch/delete/<str:id>', ajax.del_exam),
-    # courses
+    # faculties
     path('faculties/fetch/create/', ajax.create_faculty),
     path('faculties/fetch/get/<str:id>', ajax.get_faculty),
+    path('faculties/fetch/edit/', ajax.edit_faculty),
 ]

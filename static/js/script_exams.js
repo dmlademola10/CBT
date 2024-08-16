@@ -49,11 +49,11 @@ window.addEventListener("load", () => {
         $("#message").style.display = "none";
         $("#message").innerHTML = "";
     });
-    $forms("edit_exam", "edit_label").addEventListener("input", () => {
+    $forms("edit_exam", "label").addEventListener("input", () => {
         $("#edit_message").style.display = "none";
         $("#edit_message").innerHTML = "";
     });
-    $forms("edit_exam", "edit_course").addEventListener("change", function () {
+    $forms("edit_exam", "course").addEventListener("change", function () {
         $("#edit_message").style.display = "none";
         $("#edit_message").innerHTML = "";
     });

@@ -40,11 +40,13 @@
 
 .sidebar {
     background-color: rgb(21, 23, 27);
-    position: relative;
+    position: absolute;
     overflow-x: hidden;
     width: 0;
     font-size: x-large;
     transition: 0.1s;
+    top: 60px;
+    bottom: 0;
 }
 
 .sidelink {

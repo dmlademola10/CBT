@@ -81,12 +81,12 @@
                 <input type="hidden" name="id">
                 <span class="label">Exam Label</span>
                 <div class="input_group">
-                    <input type="text" id="edit_label" name="edit_label" autocomplete="off" value="" required />
+                    <input type="text" id="edit_label" name="label" autocomplete="off" value="" required />
                     <span class="clear" data-id="edit_label" title="Clear Exam Label">&times;</span>
                 </div>
                 <span class="label">Course</span>
                 <div class="input_group">
-                    <select name="edit_course">
+                    <select name="course">
                         <option value="">-- SELECT COURSE --</option>{% for faculty in collection %}
                         <optgroup label="{{ faculty.name }}">{% for course in faculty.courses %}
                             <option value="{{ course.code }}">{{ course.name }} </option>{% endfor %}
