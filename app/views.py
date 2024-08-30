@@ -186,3 +186,24 @@ def faculties(request):
 
     else:
         return render(request, "faculties.html", context)
+
+def courses(request):
+    """
+    _summary_
+
+    Args:
+        request (_type_): _description_
+    """
+    try:
+        if request.session.get("user", False) is False:
+            return HttpResponseRedirect(reverse("signin") + "?proceed=" + reverse("courses"))
+
+        context = dict()
+        context["courses"] = Course.objects.all()
+
+    except BaseException as e:
+        print(str(e))
+        return HttpResponse("An error occured!")
+
+    else:
+        return render(request, "courses.html", context)

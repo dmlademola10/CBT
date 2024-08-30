@@ -185,19 +185,13 @@ window.addEventListener("load", () => {
                     });
                     $A(".edit").forEach((elem) => {
                         elem.addEventListener("click", () => {
-                            elem.classList.remove("fa-pencil");
-                            elem.classList.add("fa-spinner");
-                            elem.classList.add("fa-spin-pulse");
-                            get_exam(elem.parentElement.getAttribute("data-id"), elem);
+                            get_exam(elem);
                         });
                     });
                     $A(".del").forEach((elem) => {
                         elem.addEventListener("click", () => {
-                            elem.classList.remove("fa-trash-can");
-                            elem.classList.add("fa-spinner");
-                            elem.classList.add("fa-spin-pulse");
                             if (confirm("Are you sure you want to delete this exam? \n" + elem.parentElement.outerText + "\nThis action can't be undone!")) {
-                                del_exam(elem.parentElement.getAttribute("data-id"), elem);
+                                del_exam(elem);
                             }
                         });
                     });
@@ -218,7 +212,11 @@ window.addEventListener("load", () => {
     }, 3000);
 });
 
-function get_exam(id, icon) {
+function get_exam(elem) {
+    elem.classList.remove("fa-pencil");
+    elem.classList.add("fa-spinner");
+    elem.classList.add("fa-spin-pulse");
+
     if (window.XMLHttpRequest) {
         var xmlhttp = new XMLHttpRequest();
     } else {
@@ -230,7 +228,7 @@ function get_exam(id, icon) {
             const response = JSON.parse(xmlhttp.responseText);
             if (response.result == true) {
                 var inputs = JSON.parse(response.message);
-                $forms("edit_exam", "id").value = id;
+                $forms("edit_exam", "id").value = elem.parentElement.getAttribute("data-id");
                 $forms("edit_exam", "edit_label").value = inputs.label;
                 $A("select[name=edit_course] optgroup option").forEach((opt) => {
                     if (opt.getAttribute("selected") != null) {
@@ -270,7 +268,11 @@ function open_box(child) {
     $(".background").style.display = "flex";
 }
 
-function del_exam(id, icon) {
+function del_exam(elem) {
+    elem.classList.remove("fa-trash-can");
+    elem.classList.add("fa-spinner");
+    elem.classList.add("fa-spin-pulse");
+
     if (window.XMLHttpRequest) {
         var xmlhttp = new XMLHttpRequest();
     } else {
@@ -296,7 +298,7 @@ function del_exam(id, icon) {
         // console.error(xmlhttp.statusText);
     };
 
-    xmlhttp.open("GET", "/exams/fetch/delete/" + id, true);
+    xmlhttp.open("GET", "/exams/fetch/delete/" + elem.parentElement.getAttribute("data-id"), true);
     xmlhttp.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
     xmlhttp.send();
 }

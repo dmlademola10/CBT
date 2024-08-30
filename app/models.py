@@ -33,6 +33,8 @@ class Course(models.Model):
     code=models.CharField(verbose_name="Course Code", max_length=50, unique=True)
     name=models.CharField(verbose_name="Course Name", max_length=100)
     faculty_code=models.CharField(verbose_name="Faculty", max_length=100)
+    time_added=models.DateTimeField(auto_now_add=True)
+
 
     def __str__(self):
         return str(self.name)
@@ -40,6 +42,7 @@ class Course(models.Model):
 class Faculty(models.Model):
     code=models.CharField(verbose_name="Faculty Code", max_length=50, unique=True)
     name=models.CharField(verbose_name="Faculty Name", max_length=100)
+    time_added=models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return str("Faculty of " + self.name)

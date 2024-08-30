@@ -213,7 +213,8 @@ def exam_v(u_input):
                 break
 
         else:
-            return Output("An error occured.")
+            print("Invalid or no course selected")
+            return Output("An error occured, try reloading page.")
 
 
     except BaseException as e:

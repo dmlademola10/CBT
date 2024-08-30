@@ -1,8 +1,8 @@
 {% extends 'master2.html' %}
 {% load static %}
-{% block style %}{% static 'css/style_faculties.css' %}{% endblock %}
-{% block title %}Faculties{% endblock %}
-{% block header %}Faculties{% endblock %}
+{% block style %}{% static 'css/style_courses.css' %}{% endblock %}
+{% block title %}Courses{% endblock %}
+{% block header %}Courses{% endblock %}
 {% block sidebar %}
 
 <div class="sidelink" data-id="{% url 'dashboard' %}">
@@ -11,10 +11,10 @@
 <div class="sidelink" data-id="{% url 'exams' %}">
     <span>Exams</span>
 </div>
-<div class="sidelink active" data-id="{% url 'faculties' %}">
+<div class="sidelink" data-id="{% url 'faculties' %}">
     <span>Faculties</span>
 </div>
-<div class="sidelink" data-id="{% url 'courses' %}">
+<div class="sidelink active" data-id="{% url 'courses' %}">
     <span>Courses</span>
 </div>
 <div class="sidelink" data-id="">
@@ -43,7 +43,7 @@
         <span class="fa fa-pencil icon edit" title="Edit"></span>
     </div>
     {% empty %}
-    <h1>No faculty found!</h1>
+    <h1>No course found!</h1>
     {% endfor %}
 </div>
 <div class="background">
@@ -83,4 +83,4 @@
 <div class="floating_msg" title="Click to close"></div>
 </div>
 {% endblock %}
-{% block script %}{% static 'js/script_faculties.js' %}{% endblock %}
+{% block script %}{% static 'js/script_courses.js' %}{% endblock %}

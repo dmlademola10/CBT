@@ -19,39 +19,19 @@ window.addEventListener("load", () => {
     });
     $A(".edit").forEach((elem) => {
         elem.addEventListener("click", () => {
-            elem.classList.remove("fa-pencil");
+            get_faculty(elem);
+        });
+    });
+    $A(".del").forEach((elem) => {
+        elem.addEventListener("click", () => {
+            elem.classList.remove("fa-trash-can");
             elem.classList.add("fa-spinner");
             elem.classList.add("fa-spin-pulse");
-
-            const headers = new Headers();
-            headers.set("X-Requested-With", "XMLHttpRequest");
-            const options = {
-                headers: headers,
+            if (confirm("Are you sure you want to delete this faculty? "
+                + elem.parentElement.outerText
+                + "\nAll exams, and courses under this faculty will be deleted.\nThis action can't be undone, continue?")) {
+                del_faculty(elem.parentElement.getAttribute("data-id"), elem);
             }
-            const req = new Request("/faculties/fetch/get/" + elem.parentElement.getAttribute("data-id"), options);
-            fetch(req, { method: "GET" }).then(res => {
-                if (!res.ok) {
-                    msg("<span class= 'fa fa-link-slash'></span> You are offline!");
-                }
-                return res.json();
-            }).then(response => {
-                if (response.result == true) {
-                    const inputs = JSON.parse(response.message);
-                    $forms("edit_faculty", "id").value = elem.parentElement.getAttribute("data-id");
-                    $forms("edit_faculty", "edit_name").value = inputs.name;
-                    $("#edit_message").style.display = "none";
-                    open_box("#edit_faculty_box")
-                } else {
-                    msg("<span class='fa fa-triangle-exclamation'></span> " + response.message);
-                }
-            }, reason => {
-                msg("<span class='fa fa-link-slash'></span> An error occured!");
-                console.error(reason);
-            }).then(() => {
-                elem.classList.add("fa-pencil");
-                elem.classList.remove("fa-spinner");
-                elem.classList.remove("fa-spin-pulse");
-            });
         });
     });
     $(".floating_msg").addEventListener("click", () => {
@@ -60,6 +40,82 @@ window.addEventListener("load", () => {
     $(".background").addEventListener("click", () => {
         $(".background").style.display = "none";
     });
+    window.setInterval(() => {
+        const headers = new Headers();
+        headers.set("X-Requested-With", "XMLHttpRequest");
+        const options = {
+            headers: headers,
+        }
+        const req = new Request("/faculties/fetch/refresh/", options);
+        fetch(req, { method: "GET" }).then(res => {
+            if (!res.ok) {
+                msg(response.message);
+            }
+            return res.json();
+        }).then(response => {
+            if (response.result == true) {
+                $(".faculties").innerHTML = "";
+                items = JSON.parse(response.message);
+                if (items.length < 1) {
+                    h1 = document.createElement("h1");
+                    text_ = document.createTextNode("No faculty found!")
+                    h1.appendChild(text_);
+                    $(".faculties").appendChild(h1);
+                }
+                items.forEach((item) => {
+                    div = document.createElement("div");
+                    div.classList.add("faculty");
+                    for_ = document.createAttribute("data-id");
+                    div.attributes.setNamedItem(for_);
+                    div.setAttribute("data-id", item.id);
+                    txt = document.createTextNode(item.name);
+                    div.appendChild(txt);
+
+                    span = document.createElement("span");
+                    span.classList.add("fa");
+                    span.classList.add("fa-trash-can");
+                    span.classList.add("icon");
+                    span.classList.add("del");
+                    title_ = document.createAttribute("title");
+                    span.attributes.setNamedItem(title_);
+                    span.setAttribute("title", "Delete");
+                    div.appendChild(span);
+
+                    span = document.createElement("span");
+                    span.classList.add("fa");
+                    span.classList.add("fa-pencil");
+                    span.classList.add("icon");
+                    span.classList.add("edit");
+                    title_ = document.createAttribute("title");
+                    span.attributes.setNamedItem(title_);
+                    span.setAttribute("title", "Edit");
+                    div.appendChild(span);
+
+                    $(".faculties").appendChild(div);
+                })
+                $A(".edit").forEach((elem) => {
+                    elem.addEventListener("click", () => {
+                        get_faculty(elem);
+                    });
+                });
+                $A(".del").forEach((elem) => {
+                    elem.addEventListener("click", () => {
+                        if (confirm("Are you sure you want to delete this faculty? "
+                            + elem.parentElement.outerText
+                            + "\nAll exams, and courses under this faculty will be deleted.\nThis action can't be undone, continue?")) {
+                            del_faculty(elem.parentElement.getAttribute("data-id"), elem);
+                        }
+                    });
+                });
+            } else {
+                msg("<span class='fa fa-triangle-exclamation'></span> " + response.message);
+            }
+        }, reason => {
+            msg("<span class='fa fa-triangle-exclamation'></span> An error occurred while contacting the server!");
+            console.error(reason);
+        });
+
+    }, 3000)
     $forms("new_faculty", "name").addEventListener("input", () => {
         $("#message").style.display = "none";
         $("#message").innerHTML = "";
@@ -138,4 +194,72 @@ function open_box(child) {
     })
     $(child).style.display = "flex";
     $(".background").style.display = "flex";
+}
+
+function del_faculty(id, elem) {
+    elem.classList.remove("fa-trash-can");
+    elem.classList.add("fa-spinner");
+    elem.classList.add("fa-spin-pulse");
+
+    const headers = new Headers();
+    headers.set("X-Requested-With", "XMLHttpRequest");
+    const options = {
+        headers: headers,
+    }
+    const req = new Request("/faculties/fetch/delete/" + id, options);
+    fetch(req, { method: "GET" }).then(res => {
+        if (!res.ok) {
+            msg("<span class='fa fa-triangle-exclamation'></span> " + response.message);
+        }
+        return res.json();
+    }).then(response => {
+        if (response.result == true) {
+            msg("<span class='fa fa-check'></span> " + response.message);
+        } else {
+            msg("<span class='fa fa-triangle-exclamation'></span> " + response.message);
+        }
+    }, reason => {
+        msg("<span class='fa fa-triangle-exclamation'></span> An error occurred while contacting the server!");
+        console.error(reason);
+    }).then(() => {
+        elem.classList.add("fa-trash-can");
+        elem.classList.remove("fa-spinner");
+        elem.classList.remove("fa-spin-pulse");
+    });
+}
+
+function get_faculty(elem) {
+    elem.classList.remove("fa-pencil");
+    elem.classList.add("fa-spinner");
+    elem.classList.add("fa-spin-pulse");
+
+    const headers = new Headers();
+    headers.set("X-Requested-With", "XMLHttpRequest");
+    const options = {
+        headers: headers,
+    }
+    const req = new Request("/faculties/fetch/get/" + elem.parentElement.getAttribute("data-id"), options);
+    fetch(req, { method: "GET" }).then(res => {
+        if (!res.ok) {
+            msg("<span class= 'fa fa-link-slash'></span> You are offline!");
+        }
+        return res.json();
+    }).then(response => {
+        if (response.result == true) {
+            const inputs = JSON.parse(response.message);
+            $forms("edit_faculty", "id").value = elem.parentElement.getAttribute("data-id");
+            $forms("edit_faculty", "edit_name").value = inputs.name;
+            $("#edit_message").style.display = "none";
+            open_box("#edit_faculty_box")
+        } else {
+            msg("<span class='fa fa-triangle-exclamation'></span> " + response.message);
+        }
+    }, reason => {
+        msg("<span class='fa fa-link-slash'></span> An error occured!");
+        console.error(reason);
+    }).then(() => {
+        elem.classList.add("fa-pencil");
+        elem.classList.remove("fa-spinner");
+        elem.classList.remove("fa-spin-pulse");
+    });
 }

@@ -41,7 +41,7 @@ def create_exam(request):
             response = {"message": "An error occured while parsing the request!", "result": False}
 
     except BaseException as e:
-        print(str(e))
+        print(str(e) + "kwk")
         return JsonResponse({"message": "An error occured!", "result": False})
 
     else:
@@ -195,7 +195,7 @@ def create_faculty(request):
             u_inputs = request.POST.dict()
             words = ["Faculty of", "Fac. of", "Fac of", "Faculties of", "Facs. of", "Facs of"]
             for word in words:
-                u_inputs["name"] = u_inputs["name"].removeprefix(word + " ")
+                u_inputs["name"] = u_inputs["name"].removeprefix(word + " ").title()
 
             print(u_inputs)
             output = validations.faculty_v(u_inputs)
@@ -298,6 +298,78 @@ def edit_faculty(request):
 
         else:
             response = {"message": "An error occured while parsing the request!", "result": False}
+
+    except BaseException as e:
+        print(str(e))
+        return JsonResponse({"message": "An error occured!", "result": False})
+
+    else:
+        return JsonResponse(response)
+
+def del_faculty(request, id):
+    try:
+        response = dict()
+        if request.session.get("user", False) is False:
+            response["message"] = "You are not signed in!"
+            response["result"] = False
+
+        elif request.method == "GET" and ajax(request):
+            if id.isnumeric() is not True:
+                response["message"] = "An error occured! Try reloading the page."
+                response["result"] = False
+            else:
+                try:
+                    #delete exams and courses, then the faculty
+                    faculty = Faculty.objects.get(id=id)
+                    courses = Course.objects.filter(faculty_code=faculty.code)
+                    cnum = enum = str(0)
+                    cnum = str(courses.count())
+                    for course in courses:
+                        exams = Exam.objects.filter(course=course.code)
+                        enum = str(exams.count())
+                        for exam in exams:
+                            exam.delete()
+                        course.delete()
+                    faculty.delete()
+
+                except Faculty.DoesNotExist as e:
+                    print(e)
+                    response["message"] = "That faculty does not exist, try reloading the page!"
+                    response["result"] = False
+
+                else:
+                    response["message"] = cnum +" course(s), "+ enum +" exam(s), and 1 faculty deleted successfully!"
+                    response["result"] = True
+
+        else:
+            response = {"message": "An error occured while parsing the request!", "result": False}
+
+    except BaseException as e:
+        print(str(e))
+        return JsonResponse({"message": "An error occured!", "result": False})
+
+    else:
+        return JsonResponse(response)
+
+def refresh_faculty(request):
+    try:
+        response = dict()
+        if request.session.get("user", False) is False:
+            response["message"] = "You are not signed in!"
+            response["result"] = False
+
+        elif request.method == "GET" and ajax(request):
+            facs = list()
+            facs_ = Faculty.objects.all().values("id", "name").order_by("-time_added")
+            for fac in facs_:
+                fac["name"] = "Faculty of "+ fac["name"]
+                facs.append(fac)
+            facs = json.dumps(facs)
+            response["message"] = facs
+            response["result"] = True
+
+        else:
+            response = {"message": "An error occured while contacting the server!", "result": False}
 
     except BaseException as e:
         print(str(e))
